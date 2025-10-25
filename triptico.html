@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tríptico Interactivo - Valores y Control Ambiental</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            /* Fondo degradado suave y vibrante */
+            background: linear-gradient(to bottom right, #f0fdf4, #f0f9ff);
+            font-family: 'Inter', sans-serif;
+        }
+        .card {
+            /* Estilo de tarjeta mejorado */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        .card:hover {
+            transform: translateY(-5px); /* Pequeño levantamiento al pasar el mouse */
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+        }
+        .icon-container {
+            /* Contenedor de iconos con estilo circular y sombra */
+            background-color: #f0fdf4;
+            border-radius: 50%;
+            padding: 0.75rem;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.2s;
+        }
+        .icon-container:hover {
+            background-color: #e0f2fe;
+        }
+        .info-box {
+            /* Animación para el cuadro de información */
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out, padding 0.4s ease-in-out;
+            padding: 0 1rem;
+        }
+        .info-box.active {
+            max-height: 100px; /* Suficientemente grande para el contenido */
+            opacity: 1;
+            padding: 0.75rem 1rem;
+        }
+    </style>
+</head>
+<body class="flex flex-col md:flex-row justify-center items-stretch min-h-screen p-6 gap-6">
+
+    <div class="card bg-white rounded-2xl shadow-lg flex-1 p-6 md:p-8">
+        <h2 class="text-3xl font-bold text-green-600 mb-4 text-center border-b-2 border-green-200 pb-2">💚 Valores Ambientales</h2>
+        <p class="text-gray-600 text-center mb-6">Haz clic en los valores para conocer más.</p>
+        
+        <div class="space-y-6">
+            <div class="text-center">
+                <div class="icon-container mx-auto cursor-pointer" onclick="toggleInfo('valor1')">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3590/3590457.png" alt="Responsabilidad" class="w-16">
+                </div>
+                <p class="text-lg font-semibold mt-3 text-gray-800">Responsabilidad</p>
+                <div id="valor1" class="info-box bg-green-50 rounded-xl mt-3 text-sm text-gray-700">
+                    Ser conscientes del impacto de nuestras acciones y cuidar activamente el entorno natural.
+                </div>
+            </div>
+
+            <div class="text-center">
+                <div class="icon-container mx-auto cursor-pointer" onclick="toggleInfo('valor2')">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2920/2920257.png" alt="Respeto" class="w-16">
+                </div>
+                <p class="text-lg font-semibold mt-3 text-gray-800">Respeto</p>
+                <div id="valor2" class="info-box bg-green-50 rounded-xl mt-3 text-sm text-gray-700">
+                    Valorar la naturaleza, la flora y fauna, evitando prácticas que dañen el ambiente.
+                </div>
+            </div>
+
+            <div class="text-center">
+                <div class="icon-container mx-auto cursor-pointer" onclick="toggleInfo('valor3')">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3233/3233580.png" alt="Solidaridad" class="w-16">
+                </div>
+                <p class="text-lg font-semibold mt-3 text-gray-800">Solidaridad</p>
+                <div id="valor3" class="info-box bg-green-50 rounded-xl mt-3 text-sm text-gray-700">
+                    Colaborar con otros para lograr un entorno sostenible y un futuro saludable para todos.
+                </div>
+            </div>
+
+            <div class="text-center">
+                <div class="icon-container mx-auto cursor-pointer" onclick="toggleInfo('valor4')">
+                    <img src="https://cdn-icons-png.flaticon.com/512/5529/5529853.png" alt="Compromiso" class="w-16">
+                </div>
+                <p class="text-lg font-semibold mt-3 text-gray-800">Compromiso</p>
+                <div id="valor4" class="info-box bg-green-50 rounded-xl mt-3 text-sm text-gray-700">
+                    Mantenerse activo y persistente en la protección ambiental y fomentar hábitos sostenibles.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card bg-white rounded-2xl shadow-lg flex-1 p-6 md:p-8">
+        <h2 class="text-3xl font-bold text-blue-600 mb-4 text-center border-b-2 border-blue-200 pb-2">🚨 Contaminación Ambiental</h2>
+        <p class="text-gray-600 text-center mb-6">Clic en las imágenes para ver más detalles.</p>
+
+        <div class="space-y-6">
+            <div class="text-center">
+                <div class="icon-container mx-auto cursor-pointer !bg-blue-50 hover:!bg-blue-100" onclick="toggleInfo('cont1')">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3673/3673059.png" alt="Aire" class="w-16">
+                </div>
+                <p class="text-lg font-semibold mt-3 text-gray-800">Contaminación del Aire</p>
+                <div id="cont1" class="info-box bg-blue-50 rounded-xl mt-3 text-sm text-gray-700">
+                    Causas: combustión, fábricas. Efectos: smog, enfermedades respiratorias, cambio climático.
+                </div>
+            </div>
+
+            <div class="text-center">
+                <div class="icon-container mx-auto cursor-pointer !bg-blue-50 hover:!bg-blue-100" onclick="toggleInfo('cont2')">
+                    <img src="https://cdn-icons-png.flaticon.com/512/4819/4819543.png" alt="Agua" class="w-16"> 
+                </div>
+                <p class="text-lg font-semibold mt-3 text-gray-800">Contaminación del Agua</p>
+                <div id="cont2" class="info-box bg-blue-50 rounded-xl mt-3 text-sm text-gray-700">
+                    Causas: vertidos, plásticos. Efectos: pérdida de biodiversidad, enfermedades, escasez.
+                </div>
+            </div>
+
+            <div class="text-center">
+                <div class="icon-container mx-auto cursor-pointer !bg-blue-50 hover:!bg-blue-100" onclick="toggleInfo('cont3')">
+                    <img src="https://cdn-icons-png.flaticon.com/512/5753/5753177.png" alt="Suelo" class="w-16">
+                </div>
+                <p class="text-lg font-semibold mt-3 text-gray-800">Contaminación del Suelo</p>
+                <div id="cont3" class="info-box bg-blue-50 rounded-xl mt-3 text-sm text-gray-700">
+                    Causas: residuos sólidos, pesticidas. Efectos: erosión, pérdida de fertilidad, contaminación de alimentos.
+                </div>
+            </div>
+
+            <div class="text-center">
+                <div class="icon-container mx-auto cursor-pointer !bg-blue-50 hover:!bg-blue-100" onclick="toggleInfo('cont4')">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3221/3221437.png" alt="Plásticos y Ruido" class="w-16">
+                </div>
+                <p class="text-lg font-semibold mt-3 text-gray-800">Plásticos & Ruido</p>
+                <div id="cont4" class="info-box bg-blue-50 rounded-xl mt-3 text-sm text-gray-700">
+                    Contaminación por residuos plásticos, microplásticos y ruido que afecta fauna y humanos.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card bg-white rounded-2xl shadow-lg flex-1 p-6 md:p-8">
+        <h2 class="text-3xl font-bold text-teal-600 mb-4 text-center border-b-2 border-teal-200 pb-2">💡 Control y Soluciones (10 Puntos)</h2>
+        <p class="text-gray-600 text-center mb-6">Toca los botones para conocer soluciones.</p>
+
+        <div class="flex flex-col space-y-3">
+            
+            <button onclick="toggleInfo('sol1')" class="flex items-center justify-center bg-teal-500 hover:bg-teal-600 text-white font-medium rounded-xl py-2 transition shadow-md hover:shadow-lg text-sm md:text-base">
+                <span class="mr-2 text-xl">♻️</span> 1. Reciclaje
+            </button>
+            <div id="sol1" class="info-box bg-teal-50 rounded-xl text-sm text-gray-700">
+                Separar y reutilizar materiales reduce desechos, ahorra energía y recursos naturales.
+            </div>
+
+            <button onclick="toggleInfo('sol2')" class="flex items-center justify-center bg-teal-500 hover:bg-teal-600 text-white font-medium rounded-xl py-2 transition shadow-md hover:shadow-lg text-sm md:text-base">
+                <span class="mr-2 text-xl">☀️</span> 2. Energía Limpia
+            </button>
+            <div id="sol2" class="info-box bg-teal-50 rounded-xl text-sm text-gray-700">
+                Fomentar el uso de fuentes renovables como paneles solares y energía eólica.
+            </div>
+
+            <button onclick="toggleInfo('sol3')" class="flex items-center justify-center bg-teal-500 hover:bg-teal-600 text-white font-medium rounded-xl py-2 transition shadow-md hover:shadow-lg text-sm md:text-base">
+                <span class="mr-2 text-xl">📚</span> 3. Educación Ambiental
+            </button>
+            <div id="sol3" class="info-box bg-teal-50 rounded-xl text-sm text-gray-700">
+                Promover conocimiento y conciencia ecológica desde temprana edad y en la comunidad.
+            </div>
+
+            <button onclick="toggleInfo('sol4')" class="flex items-center justify-center bg-teal-500 hover:bg-teal-600 text-white font-medium rounded-xl py-2 transition shadow-md hover:shadow-lg text-sm md:text-base">
+                <span class="mr-2 text-xl">📢</span> 4. Movilización Ciudadana
+            </button>
+            <div id="sol4" class="info-box bg-teal-50 rounded-xl text-sm text-gray-700">
+                Participar en campañas, apoyar políticas verdes y demandar regulaciones ambientales.
+            </div>
+
+            <button onclick="toggleInfo('sol5')" class="flex items-center justify-center bg-teal-500 hover:bg-teal-600 text-white font-medium rounded-xl py-2 transition shadow-md hover:shadow-lg text-sm md:text-base">
+                <span class="mr-2 text-xl">🛒</span> 5. Consumo Responsable
+            </button>
+            <div id="sol5" class="info-box bg-teal-50 rounded-xl text-sm text-gray-700">
+                Elegir productos locales, de bajo impacto ambiental y con empaques reducidos.
+            </div>
+
+            <button onclick="toggleInfo('sol6')" class="flex items-center justify-center bg-teal-500 hover:bg-teal-600 text-white font-medium rounded-xl py-2 transition shadow-md hover:shadow-lg text-sm md:text-base">
+                <span class="mr-2 text-xl">💧</span> 6. Ahorro de Agua
+            </button>
+            <div id="sol6" class="info-box bg-teal-50 rounded-xl text-sm text-gray-700">
+                Implementar prácticas para reducir el uso de agua en el hogar y jardinería.
+            </div>
+
+            <button onclick="toggleInfo('sol7')" class="flex items-center justify-center bg-teal-500 hover:bg-teal-600 text-white font-medium rounded-xl py-2 transition shadow-md hover:shadow-lg text-sm md:text-base">
+                <span class="mr-2 text-xl">🌳</span> 7. Reforestación
+            </button>
+            <div id="sol7" class="info-box bg-teal-50 rounded-xl text-sm text-gray-700">
+                Participar en la plantación de árboles y proteger los bosques y zonas naturales.
+            </div>
+
+            <button onclick="toggleInfo('sol8')" class="flex items-center justify-center bg-teal-500 hover:bg-teal-600 text-white font-medium rounded-xl py-2 transition shadow-md hover:shadow-lg text-sm md:text-base">
+                <span class="mr-2 text-xl">💨</span> 8. Huella de Carbono
+            </button>
+            <div id="sol8" class="info-box bg-teal-50 rounded-xl text-sm text-gray-700">
+                Usar transporte público, bicicleta o caminar, y reducir el consumo de carne.
+            </div>
+
+            <button onclick="toggleInfo('sol9')" class="flex items-center justify-center bg-teal-500 hover:bg-teal-600 text-white font-medium rounded-xl py-2 transition shadow-md hover:shadow-lg text-sm md:text-base">
+                <span class="mr-2 text-xl">🐛</span> 9. Compostaje
+            </button>
+            <div id="sol9" class="info-box bg-teal-50 rounded-xl text-sm text-gray-700">
+                Transformar los residuos orgánicos en abono natural para enriquecer el suelo.
+            </div>
+
+            <button onclick="toggleInfo('sol10')" class="flex items-center justify-center bg-teal-500 hover:bg-teal-600 text-white font-medium rounded-xl py-2 transition shadow-md hover:shadow-lg text-sm md:text-base">
+                <span class="mr-2 text-xl">🔽</span> 10. Las 3 Rs
+            </button>
+            <div id="sol10" class="info-box bg-teal-50 rounded-xl text-sm text-gray-700">
+                Aplicar rigurosamente la regla: Reducir (el consumo), Reutilizar y Reciclar.
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    // Función para abrir/cerrar cuadros de información
+    function toggleInfo(id) {
+        const box = document.getElementById(id);
+        // Cierra todos los demás cuadros antes de abrir el actual (opcional, para mantener limpio el layout)
+        document.querySelectorAll('.info-box.active').forEach(activeBox => {
+            if (activeBox.id !== id) {
+                activeBox.classList.remove('active');
+            }
+        });
+        box.classList.toggle('active');
+    }
+</script>
+</html>
